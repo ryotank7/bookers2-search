@@ -1,0 +1,8 @@
+<%= render 'users/profile', user: current_user %>
+<%= render 'books/list',books: @book %>
+<div class="col-xs-3">
+<% @books.each do |book| %>
+  <h5 class=""><%= book.title %></h5>
+ <p class=""><%= book.body %></p>
+<% end %>
+</div>

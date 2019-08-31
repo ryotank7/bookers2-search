@@ -1,0 +1,28 @@
+
+    <h2 class="">New book</h2>
+
+  <span><form action= "/books"  method="POST"></span>
+    <% if book.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= book.errors.count %>件のerrorが発生しました。</h2>
+        <ul>
+        <% book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="field">
+      <label for="title">title</label>
+      <input type="text" name="book[title]">
+    </div>
+    <div class="field">
+      <label for="body">opinion</label>
+      <textarea  name="book[body]"></textarea>
+    </div class="field">
+    <div class="actions">
+      <input type="submit" name="commit" class="btn" value= "Create Book" data-disable-with="Create Book">
+    </div>
+  </form>
+  </div>
+

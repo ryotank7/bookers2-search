@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bookers2</title>
+  </head>
+
+  <body>
+   <%= render 'layouts/header' %>
+  <span></span>
+
+  <div class="body">
+    <div class="container">
+      <p id = "notice"><%= notice %></p>
+      <div class="row">
+    <%= yield %>
+  </div>
+  </div>
+</div>
+  <%= render 'layouts/footer'%>
+  </body>
+</html>

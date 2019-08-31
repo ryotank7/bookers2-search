@@ -1,0 +1,16 @@
+<select name="column">
+	<option value="title">title</option>
+	<option value="user">user</option>
+</select>
+<select id="title">
+		<%= form_tag(books_path, :method =>'get' ) do %>
+			<%= text_field_tag :title, params[:search] %>
+			<%= submit_tag 'Search', :name => nil %>
+		<% end %>
+</select>
+<select id="user">
+		<%= form_tag(books_path, :method =>'get' ) do %>
+			<%= text_field_tag :user, params[:search] %>
+			<%= submit_tag 'Search', :name => nil %>
+		<% end %>
+</select>

@@ -1,0 +1,33 @@
+
+<div class="col-md-6 col-md-offset-3">
+<h1 class=> Editing Book!</h1>
+
+
+
+<%= form_for(@book) do |book| %>
+	<% if @book.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= @book.errors.count %>件のerrorが発生しました。</h2>
+        <ul>
+        <% @book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="field row">
+	<label for="book_title">title</label>
+	<%= book.text_field :title ,class: "col-xs-12 book_title" %>
+	</div>
+	<div class="field row">
+
+	<label for="book_body">Opinion</label>
+	<%= book.text_area :body , class: "col-xs-12 book_body"   %>
+	</div>
+	<hr>
+		<div class="actions row">
+			<%= book.submit 'update book',class: "btn btn-primary col-xs-12" %>
+		</div>
+
+<% end %>
+</div>

@@ -1,0 +1,84 @@
+
+<%= render 'users/profile', user: @user %>
+<%= render 'books/list', book: @book %>
+<div class="col-xs-9">
+	<h2>Book detail</h2>
+	<table class="table col-xs-9">
+		<tbody>
+		<tr>
+		<td>
+		<%= link_to (@book.user) do %>
+			<%= attachment_image_tag @book.user,:profile_image,size: "40×40", format: 'jpeg', fallback: "no_image.jpg", size:'40x40',  class: "attachmentuser profile_image" %>
+		 <br><%= @book.user.name %>
+		 <% end %>
+		</td>
+		 <td><%= @book.title %></td>
+		 <td><%= @book.body %></td>
+		 <% if @book.favorited_by?(current_user) %>
+  <td>
+    <%= link_to book_favorites_path(@book), method: :delete do %>
+      <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+      <%= @book.favorites.count %> いいね
+    <% end %>
+  </td>
+<% else %>
+  <td>
+    <%= link_to book_favorites_path(@book), method: :post do %>
+      <i class="fa fa-heart-o" aria-hidden="true"></i>
+      <%= @book.favorites.count %> いいね
+    <% end %>
+  </td>
+<% end %>
+		<% if @book.user == current_user %>
+			<td><%= link_to "Edit", edit_book_path(@book.id), class:"btn-sm btn-success edit_#{@book.id}" %></td>
+			<td><%= link_to "destroy", book_path(@book), method: :delete, "data-confirm" => "本当に削除しますか？",class:"btn-sm btn-danger destroy_#{@book.id}" %></td>
+		</tr>
+		<% end %>
+	</tbody>
+	<tbody>
+		<tr>
+			<td>コメント</td>
+		</tr>
+			<% @book.book_comments.each do |book_comment| %>
+			<tr>
+			<td>
+				<%= attachment_image_tag book_comment.user,:profile_image,size: "40×40", format: 'jpeg', fallback: "no_image.jpg", size:'40x40',  class: "attachmentuser profile_image" %>
+				<br><%= book_comment.user.name %>
+			</td>
+			<td><%= book_comment.comment %>
+			</td>
+			<% if book_comment.user == current_user %>
+			<td><%= link_to "destroy",book_book_comments_path(book_comment.id),  method: :delete, "data-confirm" => "本当に削除しますか？",class:"btn-sm btn-danger destroy_#{book_comment.id}" %></td>
+			<% end %>
+			<% end %>
+		</tbody>
+		</tr>
+		</tbody>
+	</tbody>
+	</table>
+		<%= form_for [@book, @book_comment] do |f| %>
+		<table class="table">
+			<tr>
+				<td>コメント欄</td>
+				<td></td>
+				<td>
+					<%= f.text_area :comment ,class: "form-control",placeholder: "コメントをここに" %>
+				</td>
+				<td>
+					<%= f.submit "送信する", class: "btn btn-sm btn-base-1" %>
+				</td>
+			</tr>
+		</table>
+		<% end %>
+	<table class="table">
+		<tr>
+			<td>いいねした人</td>
+	<% @book.favorites.each do |favorite| %>
+			<td>
+				<%= attachment_image_tag favorite.user,:profile_image,size: "40×40", format: 'jpeg', fallback: "no_image.jpg", size:'40x40',  class: "attachmentuser profile_image" %>
+				<br><%= favorite.user.name %>
+			</td>
+		</tr>
+	<% end %>
+</table>
+</div>
